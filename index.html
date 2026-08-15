@@ -697,4 +697,16 @@ const logoImage = document.getElementById('logoImage');
                 }
                 fileInput.value = '';
             });
+            </script>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+<script>
+const SUPABASE_URL = 'https://drexibmkpnbpnooqmmjl.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_NjBsRkQgR3sXuuKCfpyi9g_tMH1bbe6';
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+console.log('✅ Supabase iniciado:', supabase);
+</script>
+ 
+
+</html>
