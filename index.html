@@ -14,10 +14,11 @@
         const URL = 'https://drexibmkpnbpnooqmmjl.supabase.co';
         const KEY = 'sb_publishable_NjBsRkQgR3sXuuKCfpyi9g_tMH1bbe6';
         
-        console.log('Step 2: Credentials set');
+        console.log('URL:', URL);
+        console.log('KEY:', KEY);
         
         const sb = window.supabase.createClient(URL, KEY);
-        console.log('Step 3: Client created', sb);
+        console.log('Client created:', sb);
         
         document.getElementById('status').innerText = '✅ Conectado';
     </script>
