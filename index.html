@@ -9,18 +9,17 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-        console.log('Step 1: Script loaded');
-        
-        const URL = 'https://drexibmkpnbpnooqmmjl.supabase.co';
-        const KEY = 'sb_publishable_NjBsRkQgR3sXuuKCfpyi9g_tMH1bbe6';
-        
-        console.log('URL:', URL);
-        console.log('KEY:', KEY);
-        
-        const sb = window.supabase.createClient(URL, KEY);
-        console.log('Client created:', sb);
-        
-        document.getElementById('status').innerText = '✅ Conectado';
+        try {
+            const client = window.supabase.createClient(
+                'https://drexibmkpnbpnooqmmjl.supabase.co',
+                'sb_publishable_NjBsRkQgR3sXuuKCfpyi9g_tMH1bbe6'
+            );
+            document.getElementById('status').innerText = '✅ Conectado';
+            console.log('Success:', client);
+        } catch(e) {
+            console.error('Error:', e);
+            document.getElementById('status').innerText = '❌ Error: ' + e.message;
+        }
     </script>
 </body>
 </html>
