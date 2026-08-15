@@ -10,7 +10,16 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
         console.log('Step 1: Script loaded');
-        document.getElementById('status').innerText = 'Supabase library loaded';
+        
+        const URL = 'https://drexibmkpnbpnooqmmjl.supabase.co';
+        const KEY = 'sb_publishable_NjBsRkQgR3sXuuKCfpyi9g_tMH1bbe6';
+        
+        console.log('Step 2: Credentials set');
+        
+        const sb = window.supabase.createClient(URL, KEY);
+        console.log('Step 3: Client created', sb);
+        
+        document.getElementById('status').innerText = '✅ Conectado';
     </script>
 </body>
 </html>
