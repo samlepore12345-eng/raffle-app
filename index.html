@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Test</title>
+    <title>Raffle App</title>
 </head>
 <body>
-    <h1>¡Funciona!</h1>
-    <p>Si ves esto, el servidor está bien.</p>
+    <h1>Raffle App</h1>
+    <p>Status: <span id="status">Starting...</span></p>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        console.log('Step 1: Script loaded');
+        document.getElementById('status').innerText = 'Supabase library loaded';
+    </script>
 </body>
 </html>
