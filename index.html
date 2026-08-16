@@ -698,18 +698,102 @@ const logoImage = document.getElementById('logoImage');
                 fileInput.value = '';
             });
 
-        </script>
-</body>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+            btnCamara.addEventListener('click', () => { camInput.click() });
+            camInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) { procesarImagen(file, 'premio') }
+                camInput.value = '';
+            });
+
+            // CÁMARA PARA LOGO - NUEVO
+            btnCamaraLogo.addEventListener('click', () => { camLogoInput.click() });
+            camLogoInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        const imgUrl = event.target.result;
+                        const logoImg = document.getElementById('logoImage');
+                        const logoPlaceholder = document.getElementById('logoPlaceholder');
+                        logoImg.src = imgUrl;
+                        logoImg.style.display = 'block';
+                        logoPlaceholder.style.display = 'none';
+                        document.getElementById('cfgLogo').value = imgUrl;
+                        configNueva.logoURL = imgUrl;
+                        guardarConfigNueva();
+                        showToast('✅ Logo actualizado con cámara');
+                    };
+                    reader.readAsDataURL(file);
+                }
+                camLogoInput.value = '';
+            });
+
+            // ============================================================
+            // SINCRONIZAR CONFIGURACIÓN
+            // ============================================================
+            function sincronizarConfiguracion() {
+                const cfgLogo = document.getElementById('cfgLogo');
+                const cfgImagen = document.getElementById('cfgImagen');
+                const cfgLoteria = document.getElementById('cfgLoteria');
+                const cfgFecha = document.getElementById('cfgFecha');
+                const cfgValorPremio = document.getElementById('cfgValorPremio');
+                const cfgRegla = document.getElementById('cfgRegla');
+
+                if (cfgLogo) {
+                    cfgLogo.addEventListener('change', function() { if (this.value && this.value.trim() !== '') { mostrarLogo(this.value.trim()) } });
+                    cfgLogo.addEventListener('keypress', function(e) { if (e.key === 'Enter') { if (this.value && this.value.trim() !== '') { mostrarLogo(this.value.trim()) } } });
+                    if (cfgLogo.value && cfgLogo.value.trim() !== '') { mostrarLogo(cfgLogo.value.trim()) }
+                }
+                if (cfgImagen) {
+                    cfgImagen.addEventListener('change', function() { if (this.value && this.value.trim() !== '') { mostrarImagenPremio(this.value.trim()) } });
+                    cfgImagen.addEventListener('keypress', function(e) { if (e.key === 'Enter') { if (this.value && this.value.trim() !== '') { mostrarImagenPremio(this.value.trim()) } } });
+                    if (cfgImagen.value && cfgImagen.value.trim() !== '') { mostrarImagenPremio(cfgImagen.value.trim()) }
+                }
+                if (cfgFecha) {
+                    cfgFecha.addEventListener('change', function() { if (this.value) { actualizarFecha(this.value) } });
+                    if (cfgFecha.value) { actualizarFecha(cfgFecha.value) }
+                }
+                if (cfgRegla) {
+                    cfgRegla.addEventListener('change', function() { if (this.value) { actualizarReglas(this.value) } });
+                    if (cfgRegla.value) { actualizarReglas(cfgRegla.value) }
+                }
+                if (cfgLoteria) {
+                    cfgLoteria.addEventListener('change', function() { infoRifaNombre.textContent = this.value || 'QUINIENTAZO' });
+                    if (cfgLoteria.value) { infoRifaNombre.textContent = cfgLoteria.value }
+                }
+                if (cfgValorPremio) {
+                    cfgValorPremio.addEventListener('change', function() { infoValor.textContent = '$' + (this.value || '0') });
+                    if (cfgValorPremio.value) { infoValor.textContent = '$' + cfgValorPremio.value }
+                }
+            }
+
+            function iniciarPantallaNueva() {
+                cargarConfigNueva();
+                sincronizarConfiguracion();
+                document.querySelector('.pantalla-principal').style.display = 'block';
+                document.querySelector('.header-info').style.display = 'flex';
+                document.querySelector('.numbers-section').style.display = 'block';
+                document.querySelector('.whatsapp-area').style.display = 'flex';
+                document.querySelector('.nombre-telefono-area').style.display = 'flex';
+                document.querySelector('.btn-aceptar-final').style.display = 'block';
+            }
+
+            // ============================================================
+            // INICIO
+            // ============================================================
+            function init() {
+                loadState();
+                renderUI();
+                iniciarPantallaNueva();
+                if (window.location.search.includes('admin=1')) {
+                    adminPanel.classList.add('open');
+                    adminToggleBtn.textContent = '🔒 Cerrar Panel';
+                }
+            }
+            init();
+        })();
+        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-    const client = window.supabase.createClient(
-        'https://drexibmkpnbpnooqmmjl.supabase.co',
-        'sb_publishable_NjBsRkQgR3sXuuKCfpyi9g_tMH1bbe6'
-    );
-    console.log('✅ Supabase:', client);
-</script>
-</html>
-        </script>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
